@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:contact_cleaner/models/contact_item.dart';
+import 'package:contact_cleaner/screens/coach_mark_overlay.dart';
 import 'package:contact_cleaner/screens/onboarding_screen.dart';
 import 'package:contact_cleaner/screens/permission_screen.dart';
 import 'package:contact_cleaner/screens/swipe_screen.dart';
@@ -96,7 +97,7 @@ void main() {
     expect(allowed, isTrue);
   });
 
-  testWidgets('Swipe Screen displays card details, counter, and handles action buttons',
+  testWidgets('Swipe Screen displays card details, counter, or swipe hint, and handles action buttons',
       (WidgetTester tester) async {
     tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1.0;
@@ -105,29 +106,43 @@ void main() {
 
     bool? lastDecision;
     bool undoTapped = false;
+    bool reviewNowTapped = false;
 
     await tester.pumpWidget(
       MaterialApp(
         home: SwipeScreen(
           contacts: sampleContacts,
-          currentIndex: 0,
-          decisions: const [],
+          currentIndex: 1,
+          decisions: const [true], // 1 marked for deletion
           onDecision: (isDelete) => lastDecision = isDelete,
           onUndo: () => undoTapped = true,
+          onReviewNow: () => reviewNowTapped = true,
           onFinish: () {},
         ),
       ),
     );
 
     // Header counter
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('2'), findsOneWidget);
     expect(find.text('OF 3'), findsOneWidget);
 
-    // Front card content
-    expect(find.text('Dawit Alemu'), findsOneWidget);
-    expect(find.text('+251 91 123 4567'), findsOneWidget);
-    expect(find.text('+251 92 888 1234'), findsOneWidget);
-    expect(find.text('dawit@example.com'), findsOneWidget);
+    // Front card content for index 1
+    expect(find.text('Tigist Haile'), findsOneWidget);
+    expect(find.text('+251 91 555 7890'), findsOneWidget);
+
+    // "or swipe" guide text
+    expect(find.text('or swipe'), findsOneWidget);
+
+    // "Review (1)" shortcut button
+    expect(find.text('Review (1)'), findsOneWidget);
+    await tester.tap(find.text('Review (1)'));
+    await tester.pump();
+    expect(reviewNowTapped, isTrue);
+
+    // Tap Undo
+    await tester.tap(find.bySemanticsLabel('Undo last swipe'));
+    await tester.pump();
+    expect(undoTapped, isTrue);
 
     // Action buttons
     expect(find.text('KEEP'), findsOneWidget);
@@ -140,6 +155,43 @@ void main() {
     await tester.pump(const Duration(milliseconds: 150));
     await tester.pump(const Duration(milliseconds: 50));
     expect(lastDecision, isFalse);
+  });
+
+  testWidgets('Coach Mark Overlay renders without yellow underlines and dismisses cleanly',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    bool dismissed = false;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: CoachMarkOverlay(
+            onDismiss: () => dismissed = true,
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('QUICK TIP'), findsOneWidget);
+    expect(find.text('Swipe to decide'), findsOneWidget);
+    expect(
+      find.text('Drag a card right to delete, left to keep. Nothing is removed until you confirm.'),
+      findsOneWidget,
+    );
+    expect(find.text('Got it'), findsOneWidget);
+
+    // Verify it is inside Material (no yellow underline issue)
+    final textWidget = tester.widget<Text>(find.text('Swipe to decide'));
+    expect(textWidget.style?.decoration, isNot(TextDecoration.underline));
+
+    // Tap Got it
+    await tester.tap(find.text('Got it'));
+    await tester.pump();
+    expect(dismissed, isTrue);
   });
 
   testWidgets('Review Screen toggles checkboxes, live count, and tick-all',

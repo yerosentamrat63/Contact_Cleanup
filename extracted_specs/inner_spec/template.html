@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Handoff spec</title>
+<script src="6c7761cc-f575-4f14-b9e8-c63f740d65c6"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>/* vietnamese */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9H6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiawDFXplDs.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9H6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiawDVXplDs.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("27fb7141-dcda-435f-b0ce-fdebc304931d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9H6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiawDFXplDs.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9H6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiawDVXplDs.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("27fb7141-dcda-435f-b0ce-fdebc304931d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9H6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiawDFXplDs.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9H6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiawDVXplDs.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("27fb7141-dcda-435f-b0ce-fdebc304931d") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx3cwhsk.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxTcwhsk.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxPcwhsk.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx_cwhsk.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("465f6b9b-2158-4b22-8268-8bfc9aadc6d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx3cwhsk.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxTcwhsk.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxPcwhsk.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx_cwhsk.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("465f6b9b-2158-4b22-8268-8bfc9aadc6d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx3cwhsk.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxTcwhsk.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxPcwhsk.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx_cwhsk.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("465f6b9b-2158-4b22-8268-8bfc9aadc6d8") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+body{margin:0}
+h1,h2,h3,p,ul,ol,table{margin:0}
+h1{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:56px;font-weight:800;letter-spacing:-0.04em;line-height:1.02}
+h2{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:34px;font-weight:800;letter-spacing:-0.035em;line-height:1.05;margin-top:56px;padding-top:24px;border-top:2px solid #11120D}
+h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:21px;font-weight:700;letter-spacing:-0.02em;margin-top:28px}
+p{font-size:16px;line-height:1.6;margin-top:10px}
+ul,ol{padding-left:22px;margin-top:10px}
+li{font-size:16px;line-height:1.6;margin-top:4px}
+code,.m{font-family:'JetBrains Mono',monospace;font-size:13px;background:#EFE8D8;padding:1px 5px;border-radius:5px}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}
+th{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-align:left;color:#565449;padding:8px 10px;border-bottom:2px solid #11120D}
+td{vertical-align:top;padding:9px 10px;border-bottom:1px solid #CFC5AF;line-height:1.5}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid #11120D;vertical-align:-2px;margin-right:8px}
+.note{margin-top:14px;padding:14px 16px;background:#EFE8D8;border-radius:12px;font-size:15px;line-height:1.55}
+</style>
+</helmet>
+<div style="width: 1000px; box-sizing: border-box; padding: 56px 64px 96px 64px; background: #FFFBF4; color: #11120D; font-family: 'Inter', system-ui, sans-serif">
+
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #565449">Developer and AI-agent handoff</div>
+<h1 style="margin-top: 12px">Contact Cleaner: build spec</h1>
+<p>This page is the single source of truth for building the app. The eight 390×844 artboards on this canvas show how every screen looks. This page explains everything the pictures cannot: exact values, motion, behavior and state. Where this page and an artboard disagree, ask; do not guess. Artboard HTML is plain inline CSS and can be read for exact values.</p>
+
+<h2>1. What the app does</h2>
+<p>Contact Cleaner shows the user's phone contacts one at a time as a swipeable card. Swipe right to mark a contact for deletion, swipe left to keep it. After the last contact the user sees a review list of everything marked, can untick any, and confirms once. Only then are contacts actually deleted. Nothing is deleted before that final confirmation.</p>
+<ul>
+<li><b>Target:</b> Flutter (Android and iOS). 1 CSS px in the artboards = 1 logical pixel (dp). Reference frame is 390×844; layouts must adapt to other sizes by letting the card area flex (see Swipe screen).</li>
+<li><b>Existing code:</b> <code>main.dart</code> already implements the logic (stages: loading, denied, swiping, reviewing, done; package <code>flutter_contacts</code>; decisions, undo, review, delete). Keep that logic. Replace its look with this design, and add onboarding, the coach mark, the confirm sheet and the animations below.</li>
+<li><b>Packages:</b> <code>flutter_contacts</code>, <code>google_fonts</code> (Bricolage Grotesque, JetBrains Mono), <code>shared_preferences</code> (remember that onboarding and the coach mark were seen).</li>
+<li><b>All names, numbers and emails in the artboards are placeholders.</b> The real app reads the device contact list, sorted by display name, A to Z. The first sample contact has two numbers on purpose: it illustrates a merged contact, which is the problem this app exists to solve. The card must list every number and email a contact has.</li>
+</ul>
+
+<h2>2. Screens and flow</h2>
+<sc-raw-table>
+<sc-raw-tr><sc-raw-th>Artboard</sc-raw-th><sc-raw-th>Screen</sc-raw-th><sc-raw-th>Shown when</sc-raw-th></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Onboarding</sc-raw-td><sc-raw-td>Intro and how it works</sc-raw-td><sc-raw-td>First launch only. Button: Get started, which goes to Permission.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Permission needed</sc-raw-td><sc-raw-td>Ask for contacts access</sc-raw-td><sc-raw-td>After onboarding, and again any time access is missing or denied. Button: Allow access, which requests read and write permission, then goes to Swipe. If denied, stay here.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Coach mark</sc-raw-td><sc-raw-td>Swipe screen with tip overlay</sc-raw-td><sc-raw-td>First time the Swipe screen appears, once ever. Button: Got it.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Swipe</sc-raw-td><sc-raw-td>The main card screen</sc-raw-td><sc-raw-td>Whenever there are contacts left to decide on.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Swipe · mid-drag</sc-raw-td><sc-raw-td>Swipe screen while dragging right</sc-raw-td><sc-raw-td>A still of the drag state. It is the reference for how the card, stamp, tint and next card look partway through a swipe.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Review</sc-raw-td><sc-raw-td>List of contacts marked for deletion</sc-raw-td><sc-raw-td>After the last contact is decided, or when going back from Confirm via Cancel.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Confirm deletion</sc-raw-td><sc-raw-td>Bottom sheet over Review</sc-raw-td><sc-raw-td>When the user taps the red Delete button on Review.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Done</sc-raw-td><sc-raw-td>Result</sc-raw-td><sc-raw-td>After deletion finished. Button: Start over.</sc-raw-td></sc-raw-tr>
+</sc-raw-table>
+<p>Flow: Onboarding → Permission → Swipe (with Coach mark the first time) → Review → Confirm → Done → (Start over) → Swipe. On later launches skip Onboarding; go to Permission only if access is missing.</p>
+
+<h2>3. Design tokens</h2>
+<h3>Colors</h3>
+<p>Palette comes from four named colors: Smoky Black, Olive Drab (the primary), Bone and Floral White. Terracotta and sage are the only semantic extras.</p>
+<sc-raw-table>
+<sc-raw-tr><sc-raw-th>Token</sc-raw-th><sc-raw-th>Hex</sc-raw-th><sc-raw-th>Use</sc-raw-th></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Bone</sc-raw-td><sc-raw-td><span class="sw" style="background:#D8CFBC"></span><code>#D8CFBC</code></sc-raw-td><sc-raw-td>App background on every screen (with texture, section 3 below).</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Floral White</sc-raw-td><sc-raw-td><span class="sw" style="background:#FFFBF4"></span><code>#FFFBF4</code></sc-raw-td><sc-raw-td>Cards, list rows, round buttons, sheets; text on filled buttons.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Smoky Black</sc-raw-td><sc-raw-td><span class="sw" style="background:#11120D"></span><code>#11120D</code></sc-raw-td><sc-raw-td>Primary text, icons on light surfaces.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Olive Drab (primary)</sc-raw-td><sc-raw-td><span class="sw" style="background:#565449"></span><code>#565449</code></sc-raw-td><sc-raw-td>Primary buttons, avatar circles, progress fill, secondary text and mono labels.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Olive Ink</sc-raw-td><sc-raw-td><span class="sw" style="background:#3E3D34"></span><code>#3E3D34</code></sc-raw-td><sc-raw-td>Longer descriptive text (permission screen, coach tip).</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Terracotta (delete)</sc-raw-td><sc-raw-td><span class="sw" style="background:#B23A2E"></span><code>#B23A2E</code></sc-raw-td><sc-raw-td>Delete button fill, checked checkbox, Delete stamp, trash icons.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Sage Ink (keep)</sc-raw-td><sc-raw-td><span class="sw" style="background:#3F5A2B"></span><code>#3F5A2B</code></sc-raw-td><sc-raw-td>Keep icon and stamp, success check.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Card border</sc-raw-td><sc-raw-td><span class="sw" style="background:#CFC5AF"></span><code>#CFC5AF</code></sc-raw-td><sc-raw-td>1px border on cards and list rows.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Control border</sc-raw-td><sc-raw-td><span class="sw" style="background:#B5AA92"></span><code>#B5AA92</code></sc-raw-td><sc-raw-td>1px border on round buttons; hairline dividers on Onboarding.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Outline border</sc-raw-td><sc-raw-td><span class="sw" style="background:#A89F8A"></span><code>#A89F8A</code></sc-raw-td><sc-raw-td>1.5px border on outline buttons (back, Cancel).</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Progress track</sc-raw-td><sc-raw-td><span class="sw" style="background:#BDB29B"></span><code>#BDB29B</code></sc-raw-td><sc-raw-td>Unfilled part of the progress bar; bars in illustrations.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Stacked card</sc-raw-td><sc-raw-td><span class="sw" style="background:#F4EEDF"></span><code>#F4EEDF</code></sc-raw-td><sc-raw-td>The next card behind the front card on Swipe. Onboarding illustration back card uses <code>#EBE3D1</code> with border <code>#C4BAA3</code>.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Sage tint</sc-raw-td><sc-raw-td><span class="sw" style="background:#E3E9D2"></span><code>#E3E9D2</code></sc-raw-td><sc-raw-td>Fill for the Done success circle and the Keep chip in the coach mark. Border <code>#B9C7A0</code>.</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Terracotta tint</sc-raw-td><sc-raw-td><span class="sw" style="background:#F5DDD8"></span><code>#F5DDD8</code></sc-raw-td><sc-raw-td>Fill for the Delete chip in the coach mark, and for the Delete round button while dragging right. Border <code>#E3B3AA</code> (coach) or <code>#B23A2E</code> (button).</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Drag tints</sc-raw-td><sc-raw-td><code>rgba(178,58,46,0.16)</code><br><code>rgba(63,90,43,0.16)</code></sc-raw-td><sc-raw-td>Full-card overlay fading in while dragging right (terracotta) or left (sage).</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Scrims</sc-raw-td><sc-raw-td><code>rgba(17,18,13,0.66)</code><br><code>rgba(17,18,13,0.60)</code></sc-raw-td><sc-raw-td>Behind the coach tip (0.66) and the confirm sheet (0.60).</sc-raw-td></sc-raw-tr>
+</sc-raw-table>
+<p>Contrast checks already done: Olive on Bone 4.9:1, Floral White on Olive 7.6:1, Floral White on Terracotta 6.5:1, Smoky Black on Floral White above 16:1. Do not lighten these.</p>
+
+<h3>Typography</h3>
+<p>Two families only. <b>Bricolage Grotesque</b> (weights 600, 700, 800) for headlines, contact names, big numbers, app name and button labels. <b>JetBrains Mono</b> (weights 400, 500, 700) for small uppercase labels, captions, phone numbers in lists and email. Letter spacing in the artboards is in em; in Flutter use <code>letterSpacing = em × fontSize</code>.</p>
+<sc-raw-table>
+<sc-raw-tr><sc-raw-th>Role</sc-raw-th><sc-raw-th>Font</sc-raw-th><sc-raw-th>Size / weight</sc-raw-th><sc-raw-th>Letter spacing</sc-raw-th></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Swipe counter (the big “3”)</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>40 / 800, line height 1</sc-raw-td><sc-raw-td>−0.045em (−1.8)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Onboarding headline</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>38 / 800, line height 1.02</sc-raw-td><sc-raw-td>−0.04em (−1.52)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Permission headline</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>38 / 800, line height 1.05, centered</sc-raw-td><sc-raw-td>−0.04em</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Screen title (Review, Done)</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>40 / 800</sc-raw-td><sc-raw-td>−0.04em (−1.6)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Contact name on card</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>36 / 800, line height 1.05, centered</sc-raw-td><sc-raw-td>−0.035em (−1.26)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Phone number on card</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>22 / 600</sc-raw-td><sc-raw-td>−0.03em (−0.66)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Coach tip title</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>30 / 800</sc-raw-td><sc-raw-td>−0.04em (−1.2)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Confirm sheet title</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>32 / 800</sc-raw-td><sc-raw-td>−0.04em (−1.28)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Stat numbers, Done</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>36 / 800, line height 1</sc-raw-td><sc-raw-td>−0.045em (−1.62)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Step numbers 01 02 03</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>26 / 800, olive</sc-raw-td><sc-raw-td>−0.045em (−1.17)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>App name “Contact Cleaner”</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>20 / 800</sc-raw-td><sc-raw-td>−0.04em (−0.8)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Row name, step title</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>17 / 700</sc-raw-td><sc-raw-td>−0.02em (−0.34)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Button label</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>17 / 700</sc-raw-td><sc-raw-td>−0.02em (−0.34)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Avatar initial</sc-raw-td><sc-raw-td>Bricolage</sc-raw-td><sc-raw-td>52 / 800 on card; 28 / 800 onboarding; 18 / 700 in rows</sc-raw-td><sc-raw-td>−0.03em (card)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>“OF 8” label</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>12 / 500, UPPERCASE, olive</sc-raw-td><sc-raw-td>0.12em (1.44)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Keep / Delete labels under buttons</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>12 / 700, UPPERCASE, olive</sc-raw-td><sc-raw-td>0.14em (1.68)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Caption under screen title</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>12 / 500, UPPERCASE, olive</sc-raw-td><sc-raw-td>0.10em (1.2)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>“6 of 7 selected”, tick-all link</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>12 / 700, UPPERCASE; link is olive and underlined</sc-raw-td><sc-raw-td>0.12em (1.44)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Stamp (DELETE / KEEP)</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>15 / 700, UPPERCASE</sc-raw-td><sc-raw-td>0.16em (2.4)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Small labels (stat labels, chips, footnote)</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>11 / 700 (footnote 500), UPPERCASE</sc-raw-td><sc-raw-td>0.12–0.16em (≈1.3–1.8)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Email, phone in list</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>12 / 400, olive</sc-raw-td><sc-raw-td>0.04em (0.48)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Step description, coach body</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>12 / 400, sentence case, line height 1.6</sc-raw-td><sc-raw-td>0.02em (0.24)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Permission paragraph</sc-raw-td><sc-raw-td>JetBrains Mono</sc-raw-td><sc-raw-td>13 / 400, line height 1.6, Olive Ink, max width 290</sc-raw-td><sc-raw-td>0.02em (0.26)</sc-raw-td></sc-raw-tr>
+</sc-raw-table>
+
+<h3>Shape, spacing, elevation</h3>
+<ul>
+<li><b>Radii:</b> swipe card and coach panel 28; sheet 28 on top corners only; buttons 16 (coach button 14); list rows 16; checkbox 9; progress bar 3; round buttons and avatars fully circular.</li>
+<li><b>Page padding:</b> Swipe and Onboarding 24 on the sides, 32 at the bottom; Review list 16 on the sides; Review bottom bar 20 on the sides, 32 at the bottom.</li>
+<li><b>Hit targets:</b> every tappable control at least 44×44. Primary buttons are 56 tall; round action buttons 68; undo and Review back controls 44 and 56.</li>
+<li><b>Card shadow:</b> <code>0 16px 36px rgba(17,18,13,0.16)</code> at rest; <code>0 22px 44px rgba(17,18,13,0.22)</code> while dragged. Coach panel: <code>0 24px 60px rgba(0,0,0,0.35)</code>.</li>
+<li><b>Icons:</b> stroke only, round caps and joins, stroke width 2 to 2.4 (checkmark 2.4, trash 2.2, arrows 2.4, tick in checkbox 3.4). Needed: undo, check, trash, arrow left, arrow right, lock. The exact SVG paths are in the artboard markup; any matching stroke icon set is acceptable.</li>
+</ul>
+
+<h3>Background texture</h3>
+<p>Every screen has a subtle two-layer texture over the Bone color, meant to feel like dark wood grain seen through paper. In the HTML it is an SVG noise filter, which Flutter cannot use directly. Recreate it as a tileable PNG (or a fragment shader) drawn once behind all content and never above it:</p>
+<ul>
+<li><b>Layer A, streaks:</b> horizontal fractal noise, stretched about 60× wider than tall (base frequency 0.006 horizontally, 0.35 vertically), 3 octaves, colored olive-grey <code>#57554B</code>, layer opacity about 0.2.</li>
+<li><b>Layer B, grain:</b> fine fractal noise (frequency 0.85, 2 octaves), colored near-black <code>#121210</code>, layer opacity about 0.4, thresholded so only the brighter noise specks show and the rest is transparent.</li>
+<li>Result should read as barely-there speckle and faint horizontal banding. Text must stay fully readable. Cards sit on top of the texture and are solid, with no texture on them.</li>
+</ul>
+
+<h2>4. Screen details</h2>
+
+<h3>Onboarding</h3>
+<p>Column, top to bottom, padding 28 / 24 / 32 / 24: header row (app name left; “HOW IT WORKS” mono label right) → illustration 216 tall → headline “Clean your contacts, one swipe at a time.” (24 above) → three step rows → flexible space → primary button “Get started” → footnote “NEEDS ACCESS TO YOUR CONTACTS” centered, 12 below the button.</p>
+<ul>
+<li><b>Illustration:</b> a back card (168×196, radius 24, rotated −8°, fill <code>#EBE3D1</code>) and a front card (168×196, Floral White, rotated +6°, shadow) showing an avatar circle (60), a dark bar (96×10), and two bone bars. At the left edge a 52 circle with a left arrow in sage and label KEEP; at the right edge a 52 circle with a right arrow in terracotta and label DELETE; both vertically at 72 from the top.</li>
+<li><b>Steps:</b> each row has a top hairline (<code>#B5AA92</code>), 12 vertical padding, a 44-wide big number, then a title (17/700) and mono description. The last row also has a bottom hairline. Copy: 01 “Swipe through them” / “Right to delete, left to keep.”; 02 “Review your picks” / “Untick anything you changed your mind on.”; 03 “Delete them all” / “One confirmation, then they are gone.”</li>
+</ul>
+
+<h3>Permission needed</h3>
+<p>Everything centered vertically and horizontally, 32 padding: a 112 olive circle with a white padlock icon (52) → title “Contacts access needed” (32 above) → paragraph “To show and delete your contacts, the app needs permission to read and edit them.” (16 above) → full-width primary button “Allow access” (40 above).</p>
+
+<h3>Swipe</h3>
+<p>Column, padding 24 / 24 / 32 / 24. Top to bottom:</p>
+<ol>
+<li><b>Header row, 44 tall:</b> left, the big counter (current position, 1-based) with “OF {total}” baseline-aligned 10 to its right; right, a 44 circle Undo button (Floral White, 1px control border, undo icon). Undo is shown at 40% opacity and disabled when nothing has been decided yet.</li>
+<li><b>Progress bar</b> 12 below: 6 tall, track <code>#BDB29B</code>, fill olive. Fill width = decided ÷ total (so it is 0% on the first card and 25% on the third of eight).</li>
+<li><b>Card area</b> 24 below, takes all remaining height. Both cards are inset 0 on the left and right and 8 from the bottom of this area. Front card: Floral White, radius 28, 1px card border, resting shadow, content centered with 28 padding. Content: avatar 112 olive circle with initial; 24 gap; name; 22 gap; each phone number (8 gap between); then, only if the contact has an email, the mono email 6 below the numbers. Long names wrap to two lines and center.</li>
+<li><b>Next card</b> sits behind: same size, fill <code>#F4EEDF</code>, scaled to 0.92 and moved down 16, pivoting at its bottom center. It shows the next contact's avatar and name only. Hide it when the current contact is the last.</li>
+<li><b>Action row</b> 24 below: two round 68 buttons with labels, Keep at the left, Delete at the right, 36 side padding, space between. Keep icon is a sage check; Delete icon is a terracotta trash. Labels sit 8 below the buttons. The button order matches the swipe directions: left = keep, right = delete.</li>
+</ol>
+
+<h3>Swipe · mid-drag (reference still)</h3>
+<p>Shows the card 112 px right of center and rotated 6.7°, a DELETE stamp at its top-left (rotated −12°, 3px terracotta border, radius 10, padding 6/12, inset 22 from left and 26 from top), a terracotta tint over the whole card, a heavier shadow, the next card almost at full size (scale 0.985, 3 down), and the Delete round button filled with the terracotta tint. Dragging left mirrors this: a KEEP stamp at the top-right rotated +12° in sage, with the sage tint, and the Keep button tinted <code>#E3E9D2</code>.</p>
+
+<h3>Coach mark</h3>
+<p>Overlay on top of the normal Swipe screen (counter 1, undo disabled, progress 0). A scrim covers the whole screen. A Floral White panel, radius 28, 24 padding, 24 from the screen sides, is centered. Panel content: mono label “QUICK TIP” → 130 tall demo area → title “Swipe to decide” → body “Drag a card right to delete, left to keep. Nothing is removed until you confirm.” → full-width 52 olive button “Got it”.</p>
+<ul>
+<li><b>Demo area:</b> left chip (44 circle, sage tint, left arrow, label KEEP in sage), center mini card (92×116, radius 18, Floral White, avatar 36, two bars), right chip (44 circle, terracotta tint, right arrow, label DELETE in terracotta). Two faint ghost cards (40% opacity) sit behind the mini card tilted to the left and right to suggest motion. In the live app the mini card animates (see Motion).</li>
+<li><b>Rules:</b> shown only the first time the Swipe screen appears, then never again (persist a flag). While it is visible, swiping and the action buttons are disabled. It closes only through “Got it”.</li>
+</ul>
+
+<h3>Review</h3>
+<p>Column. Title “Review” (40) and caption “UNTICK ANY YOU WANT TO KEEP” in a 24 padded header → a row with the live count “{selected} of {marked} selected” on the left and a text button on the right that reads “Tick all” or “Untick all” → scrolling list of rows (8 apart, 16 side padding) → bottom bar.</p>
+<ul>
+<li><b>Row:</b> Floral White, radius 16, 1px card border, 12/16 padding, 14 gaps. Left an olive avatar circle (44) with the initial; middle the name (17/700) over the first phone number in mono; right the checkbox. The entire row is one tap target that toggles the checkbox.</li>
+<li><b>Checkbox:</b> a 28×28 box, radius 9, border 2. Checked: fill and border Terracotta with a Floral White tick (16 px, stroke 3.4). Unchecked: fill Floral White, border Olive. Checked means “will be deleted”. Every marked row starts checked. Animate fill and border over 150 ms. When a row is unchecked, the whole row fades to 60% opacity over 150 ms. It needs a visible focus ring (2px Smoky Black, 2px offset) for keyboard and switch users, and its accessibility label is “Delete {name}”.</li>
+<li><b>Select-all link:</b> if every row is checked it says “Untick all” and unchecks everything; otherwise it says “Tick all” and checks everything.</li>
+<li><b>Bottom bar</b> (padding 12 / 20 / 32 / 20, 12 gap): a 56×56 outline back button (arrow left) and a flexible 56 tall terracotta button “Delete {n} contacts” (“contact” when n is 1). It is disabled at 40% opacity when nothing is checked. Back returns to Swipe on the last card, and the last decision is undone.</li>
+<li><b>Empty state:</b> if nothing was marked, replace the list with the centered mono text “NOTHING MARKED FOR DELETION”.</li>
+</ul>
+
+<h3>Confirm deletion</h3>
+<p>Review stays visible under a 0.60 scrim. A Floral White bottom sheet (top corners 28, padding 28 / 24 / 32 / 24) holds: title “Delete {n} contacts?” → mono caption “THIS CANNOT BE UNDONE” → two equal 56 tall buttons 12 apart: “Cancel” (outline) and “Delete” (terracotta), 24 below the caption. Cancel closes the sheet and leaves everything as it was. Delete runs the deletion, then shows Done.</p>
+
+<h3>Done</h3>
+<p>Centered column, 32 padding: a 112 sage-tint circle with a sage check (52) → title “Deleted {n} contacts” (“Nothing deleted” if 0) → caption “YOUR CONTACT LIST IS CLEANER NOW” → two stat cards 12 apart (Floral White, radius 16, padding 16/28; the number and a mono label “DELETED” or “KEPT”) → full-width olive button “Start over”. Kept = total contacts minus deleted. Start over resets all decisions and returns to the first contact on Swipe, with no onboarding and no coach mark.</p>
+
+<h2>5. Motion</h2>
+<p>These values were prototyped and tuned; use them as written. The mid-drag artboard shows one frame of the swipe.</p>
+<sc-raw-table>
+<sc-raw-tr><sc-raw-th>What</sc-raw-th><sc-raw-th>Trigger</sc-raw-th><sc-raw-th>Behavior</sc-raw-th><sc-raw-th>Timing / curve</sc-raw-th></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Card follows finger</sc-raw-td><sc-raw-td>Horizontal drag on the front card</sc-raw-td><sc-raw-td>Card translates with the finger on x only. It rotates <code>0.06° × dx</code>, clamped to ±20°, pivoting around the point 50% across and 120% down the card (so it swings like a held card). No transition while dragging.</sc-raw-td><sc-raw-td>Immediate</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Stamp and tint</sc-raw-td><sc-raw-td>During drag</sc-raw-td><sc-raw-td>Opacity = <code>min(|dx| ÷ 90, 1)</code>. Right drag shows the DELETE stamp and terracotta tint; left drag shows the KEEP stamp and sage tint. Only one side at a time.</sc-raw-td><sc-raw-td>Immediate</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Next card grows</sc-raw-td><sc-raw-td>During drag</sc-raw-td><sc-raw-td>p = <code>min(|dx| ÷ 140, 1)</code>. Next card scale = 0.92 + 0.08·p; its vertical offset = 16·(1 − p). Pivot at its bottom center.</sc-raw-td><sc-raw-td>Immediate while dragging</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Commit swipe</sc-raw-td><sc-raw-td>Release with |dx| &gt; 110</sc-raw-td><sc-raw-td>Card flies to ±560 with rotation continuing toward the 20° clamp. The next card finishes growing to full size at the same time.</sc-raw-td><sc-raw-td>260 ms, cubic-bezier(0.4, 0, 1, 1)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Cancel swipe</sc-raw-td><sc-raw-td>Release with |dx| ≤ 110</sc-raw-td><sc-raw-td>Card returns to center and rotation 0 with a slight overshoot. Stamp and tint fade back out. Next card shrinks back.</sc-raw-td><sc-raw-td>380 ms, cubic-bezier(0.34, 1.56, 0.64, 1)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Advance</sc-raw-td><sc-raw-td>When the fly-out ends</sc-raw-td><sc-raw-td>Record the decision, move to the next contact, and reset card and next-card transforms to their resting values <b>instantly, with no animation</b> (otherwise the new card would visibly slide back in from off-screen). Then re-enable transitions on the next frame. The new front card shows exactly what the grown-up next card showed, so there is no visual jump.</sc-raw-td><sc-raw-td>0 ms</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Buttons</sc-raw-td><sc-raw-td>Tap Keep or Delete</sc-raw-td><sc-raw-td>Run the same commit animation programmatically (Keep flies left, Delete flies right). Ignore taps while an animation is running.</sc-raw-td><sc-raw-td>Same as commit</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Progress bar</sc-raw-td><sc-raw-td>Any decision or undo</sc-raw-td><sc-raw-td>Fill width animates to the new value.</sc-raw-td><sc-raw-td>300 ms ease-out</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Undo</sc-raw-td><sc-raw-td>Tap undo</sc-raw-td><sc-raw-td>Remove the last decision, go back one contact, and show it instantly at rest (no fly-in).</sc-raw-td><sc-raw-td>0 ms</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Coach demo card</sc-raw-td><sc-raw-td>While the coach tip is visible</sc-raw-td><sc-raw-td>The mini card loops: rest → slides 30 right while tilting +7° → back to rest → slides 30 left while tilting −7° → rest. Same pivot rule as the real card.</sc-raw-td><sc-raw-td>2.4 s loop, ease-in-out, repeats forever</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Coach entrance</sc-raw-td><sc-raw-td>Tip appears</sc-raw-td><sc-raw-td>Scrim fades in; panel fades in while rising 16.</sc-raw-td><sc-raw-td>Scrim 220 ms; panel 280 ms cubic-bezier(0.2, 0.8, 0.2, 1)</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Sheet / screen entrance</sc-raw-td><sc-raw-td>Confirm sheet and screen changes</sc-raw-td><sc-raw-td>Sheet rises from 16 below while fading in; full screens fade in.</sc-raw-td><sc-raw-td>280 ms and 220 ms</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Checkbox, row dim</sc-raw-td><sc-raw-td>Toggle</sc-raw-td><sc-raw-td>Box fill and border change; row opacity goes between 1 and 0.6.</sc-raw-td><sc-raw-td>150 ms</sc-raw-td></sc-raw-tr>
+</sc-raw-table>
+<div class="note"><b>Reduced motion:</b> when the system “reduce motion” setting is on, turn off the coach demo loop and entrance animations, and make fly-out and spring-back instant. The swipe must still work.</div>
+<div class="note"><b>Suggested addition (not in the mockups):</b> also commit a swipe when the release velocity is high (for example above 700 px/s) even if |dx| is under 110, so quick flicks feel natural.</div>
+
+<h2>6. Behavior and state</h2>
+<ul>
+<li><b>State to keep:</b> the contact list (sorted), current index, a decisions list (one boolean per decided contact, true = delete), the set of unchecked contact ids on Review, the stage, the deleted count, and persisted flags for “onboarding seen” and “coach seen”.</li>
+<li><b>Decide:</b> swiping right or tapping Delete records true; swiping left or tapping Keep records false. After the last contact, go to Review. Review lists exactly the contacts with true, in their original order.</li>
+<li><b>Undo:</b> removes the last decision, steps back one contact, clears Review's unchecked set, and goes to Swipe (this also covers the back button on Review).</li>
+<li><b>Delete:</b> on confirm, delete only contacts that are marked and still checked, using the full contact object from the device list. Show Done with that number. Kept on Done = total minus deleted.</li>
+<li><b>Permission:</b> request read and write access on first need. If it is denied or later revoked, show the Permission screen. An empty contact list goes straight to Done with “Nothing deleted”.</li>
+<li><b>Never</b> delete anything before the confirm sheet's Delete button is tapped.</li>
+</ul>
+
+<h2>7. Flutter implementation notes</h2>
+<ul>
+<li>Do not use <code>Dismissible</code> for the card. Build the card with a <code>GestureDetector</code> (horizontal drag update and end) driving an <code>AnimationController</code>, with <code>Transform</code> for translate and rotate (alignment <code>Alignment(0, 1.4)</code> gives the 120% pivot). Stamp, tint and next-card values are computed from the same drag offset.</li>
+<li>Use <code>CubicCurve</code> for the curves listed in section 5; they are standard cubic-bezier values.</li>
+<li>Fonts through <code>google_fonts</code>. Set <code>letterSpacing</code> from the table in section 3 (em × size). Uppercase labels are real uppercase strings or <code>.toUpperCase()</code>.</li>
+<li>Tile the texture PNG as a <code>DecorationImage</code> (or paint it with a shader) in a single full-screen <code>Stack</code> layer behind the Scaffold content, with transparent Scaffold and AppBar backgrounds.</li>
+<li>Safe areas: the artboards leave 24 at the top and 32 at the bottom as content padding; add system insets on top of that on real devices.</li>
+<li>Build checkbox and primary buttons as small reusable widgets using the tokens above so every screen shares them.</li>
+</ul>
+
+<h2>8. Accessibility checklist</h2>
+<ul>
+<li>Every icon-only button has a semantic label: “Undo last swipe”, “Keep contact”, “Mark contact for deletion”, “Back to swiping”.</li>
+<li>Swiping is never the only way to decide: the Keep and Delete buttons always work, and screen-reader users can use them.</li>
+<li>Announce decisions (for example “Marked Dawit Alemu for deletion”) and the new position.</li>
+<li>Minimum touch target 44×44; text contrast at or above 4.5:1 using the colors in this spec; no meaning is carried by color alone (stamps and labels use words and icons as well).</li>
+<li>Keep the focus ring on Review checkboxes and the coach button visible.</li>
+</ul>
+
+<h2>9. Done when</h2>
+<ol>
+<li>All eight screens match the artboards at 390×844 for colors, type, spacing and copy.</li>
+<li>Dragging a card behaves as in section 5: tilt, stamp and tint, next card growing, commit past 110, springy cancel, and no visible jump when the next card takes over.</li>
+<li>The coach mark appears once, on first arrival at Swipe, and blocks swiping until “Got it”.</li>
+<li>Review uses the custom checkbox, the tick-all toggle and the live counts; Delete is disabled at zero.</li>
+<li>Nothing is deleted until the confirm sheet's Delete is tapped; Done shows correct deleted and kept counts.</li>
+<li>Reduced-motion and screen-reader behavior from sections 5 and 8 work.</li>
+</ol>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:1000,&quot;height&quot;:6200}}">
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+
+
+</body></html>

@@ -47,5 +47,5 @@ app.*.map.json
 # Widget Preview related
 .widget_preview/
 
-phone_screenshot.png
+phone_screenshot*.png
 

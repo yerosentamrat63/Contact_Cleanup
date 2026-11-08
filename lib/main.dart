@@ -172,6 +172,7 @@ class _MainCoordinatorState extends State<MainCoordinator> {
   void _onUndo() {
     if (_decisions.isNotEmpty && _currentIndex > 0) {
       setState(() {
+        // Remove the decision, reverting the contact completely back to un-marked state
         _decisions.removeLast();
         _currentIndex--;
       });
@@ -179,17 +180,9 @@ class _MainCoordinatorState extends State<MainCoordinator> {
   }
 
   void _onBackFromReview() {
-    if (_decisions.isNotEmpty && _currentIndex > 0) {
-      setState(() {
-        _decisions.removeLast();
-        _currentIndex--;
-        _stage = AppStage.swiping;
-      });
-    } else {
-      setState(() {
-        _stage = AppStage.swiping;
-      });
-    }
+    setState(() {
+      _stage = AppStage.swiping;
+    });
   }
 
   void _onConfirmDelete(List<ContactItem> toDelete) async {
@@ -254,6 +247,11 @@ class _MainCoordinatorState extends State<MainCoordinator> {
               decisions: _decisions,
               onDecision: _onDecision,
               onUndo: _onUndo,
+              onReviewNow: () {
+                setState(() {
+                  _stage = AppStage.reviewing;
+                });
+              },
               onFinish: () {
                 setState(() {
                   _stage = AppStage.reviewing;

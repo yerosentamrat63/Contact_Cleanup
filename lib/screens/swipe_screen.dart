@@ -16,6 +16,7 @@ class SwipeScreen extends StatefulWidget {
   final Function(bool isDelete) onDecision;
   final VoidCallback onUndo;
   final VoidCallback onFinish;
+  final VoidCallback? onReviewNow;
 
   const SwipeScreen({
     super.key,
@@ -25,6 +26,7 @@ class SwipeScreen extends StatefulWidget {
     required this.onDecision,
     required this.onUndo,
     required this.onFinish,
+    this.onReviewNow,
   });
 
   @override
@@ -157,6 +159,14 @@ class _SwipeScreenState extends State<SwipeScreen>
     });
   }
 
+  void _handleUndo() {
+    if (widget.decisions.isNotEmpty && !_isAnimatingCommit) {
+      HapticFeedback.mediumImpact();
+      SemanticsService.announce('Reverted last decision', TextDirection.ltr);
+      widget.onUndo();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.currentIndex >= widget.contacts.length) {
@@ -171,16 +181,18 @@ class _SwipeScreenState extends State<SwipeScreen>
     final decidedCount = widget.decisions.length;
     final progressFraction = totalCount > 0 ? (decidedCount / totalCount) : 0.0;
 
+    final markedDeleteCount = widget.decisions.where((d) => d).length;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: AppBackground(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 24, 24, 32),
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Top Header: Counter & Undo button
+                // Top Header: Counter, "Review marked" shortcut, & Undo button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -200,15 +212,66 @@ class _SwipeScreenState extends State<SwipeScreen>
                         ),
                       ],
                     ),
-                    CircleIconButton(
-                      semanticLabel: 'Undo last swipe',
-                      isEnabled: widget.decisions.isNotEmpty && !_isAnimatingCommit,
-                      icon: const UndoIcon(size: 22),
-                      onTap: () {
-                        if (widget.decisions.isNotEmpty && !_isAnimatingCommit) {
-                          widget.onUndo();
-                        }
-                      },
+
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Quick Review Button: allows user to jump to Review for already marked contacts
+                        if (markedDeleteCount > 0 && widget.onReviewNow != null) ...[
+                          GestureDetector(
+                            onTap: widget.onReviewNow,
+                            behavior: HitTestBehavior.opaque,
+                            child: Container(
+                              height: 38,
+                              padding: const EdgeInsets.symmetric(horizontal: 14),
+                              decoration: BoxDecoration(
+                                color: AppColors.floralWhite,
+                                borderRadius: BorderRadius.circular(19),
+                                border: Border.all(
+                                  color: AppColors.terracotta,
+                                  width: 1.5,
+                                ),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(17, 18, 13, 0.08),
+                                    blurRadius: 8,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const TrashIcon(
+                                      size: 16,
+                                      color: AppColors.terracotta,
+                                      strokeWidth: 2.0,
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      'Review ($markedDeleteCount)',
+                                      style: AppTypography.smallLabel(
+                                        color: AppColors.terracotta,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                        ],
+
+                        // Undo Button: reverts the decision and marks back to normal
+                        CircleIconButton(
+                          semanticLabel: 'Undo last swipe',
+                          isEnabled: widget.decisions.isNotEmpty && !_isAnimatingCommit,
+                          icon: const UndoIcon(size: 22),
+                          onTap: _handleUndo,
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -301,9 +364,9 @@ class _SwipeScreenState extends State<SwipeScreen>
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 20),
 
-                // Action Row (Keep and Delete buttons)
+                // Action Row (Keep and Delete buttons with "or swipe" label in between)
                 AnimatedBuilder(
                   animation: _cardAnimController,
                   builder: (context, child) {
@@ -315,6 +378,7 @@ class _SwipeScreenState extends State<SwipeScreen>
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           // KEEP button (Sage)
                           ActionChoiceButton(
@@ -331,6 +395,18 @@ class _SwipeScreenState extends State<SwipeScreen>
                             onTap: _isAnimatingCommit
                                 ? null
                                 : () => _commitSwipe(isDelete: false),
+                          ),
+
+                          // "or swipe" hint text between buttons
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 24.0),
+                            child: Text(
+                              'or swipe',
+                              style: AppTypography.smallLabel(
+                                color: AppColors.oliveDrab.withOpacity(0.7),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
 
                           // DELETE button (Terracotta)

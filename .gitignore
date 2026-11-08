@@ -48,4 +48,6 @@ app.*.map.json
 .widget_preview/
 
 phone_screenshot*.png
+extracted_screens_html/
+extracted_specs/
 

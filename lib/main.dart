@@ -193,18 +193,18 @@ class _MainCoordinatorState extends State<MainCoordinator> {
     final deleted = await ContactService.deleteContacts(toDelete);
 
     setState(() {
+      final deletedIds = toDelete.map((c) => c.id).toSet();
+      _contacts.removeWhere((c) => deletedIds.contains(c.id));
       _deletedCount = deleted;
-      _keptCount = _contacts.length - deleted;
+      _keptCount = _contacts.length;
+      _currentIndex = 0;
+      _decisions.clear();
       _stage = AppStage.done;
     });
   }
 
-  void _onStartOver() {
-    setState(() {
-      _currentIndex = 0;
-      _decisions.clear();
-      _stage = AppStage.swiping;
-    });
+  void _onStartOver() async {
+    await _loadContactsAndStart();
   }
 
   @override

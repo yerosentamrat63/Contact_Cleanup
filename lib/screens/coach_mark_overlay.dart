@@ -213,7 +213,7 @@ class _CoachMarkOverlayState extends State<CoachMarkOverlay>
                     height: 44,
                     decoration: BoxDecoration(
                       color: Color.lerp(
-                        AppColors.sageTint.withOpacity(0.4),
+                        AppColors.sageTint.withValues(alpha: 0.4),
                         AppColors.sageTint,
                         keepHighlight,
                       ),
@@ -227,7 +227,7 @@ class _CoachMarkOverlayState extends State<CoachMarkOverlay>
                       boxShadow: keepHighlight > 0.3
                           ? [
                               BoxShadow(
-                                color: AppColors.sageInk.withOpacity(0.2),
+                                color: AppColors.sageInk.withValues(alpha: 0.2),
                                 blurRadius: 10,
                                 offset: const Offset(0, 3),
                               )
@@ -267,7 +267,7 @@ class _CoachMarkOverlayState extends State<CoachMarkOverlay>
                     height: 44,
                     decoration: BoxDecoration(
                       color: Color.lerp(
-                        AppColors.terracottaTint.withOpacity(0.4),
+                        AppColors.terracottaTint.withValues(alpha: 0.4),
                         AppColors.terracottaTint,
                         deleteHighlight,
                       ),
@@ -281,7 +281,7 @@ class _CoachMarkOverlayState extends State<CoachMarkOverlay>
                       boxShadow: deleteHighlight > 0.3
                           ? [
                               BoxShadow(
-                                color: AppColors.terracotta.withOpacity(0.2),
+                                color: AppColors.terracotta.withValues(alpha: 0.2),
                                 blurRadius: 10,
                                 offset: const Offset(0, 3),
                               )

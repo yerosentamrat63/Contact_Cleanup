@@ -7,6 +7,7 @@ import 'package:contact_cleaner/screens/permission_screen.dart';
 import 'package:contact_cleaner/screens/swipe_screen.dart';
 import 'package:contact_cleaner/screens/review_screen.dart';
 import 'package:contact_cleaner/screens/done_screen.dart';
+import 'package:contact_cleaner/widgets/app_buttons.dart';
 import 'package:contact_cleaner/widgets/app_checkbox.dart';
 
 void main() {
@@ -239,6 +240,20 @@ void main() {
     await tester.tap(find.bySemanticsLabel('Back to swiping').hitTestable());
     await tester.pump();
     expect(backTapped, isTrue);
+
+    // Test Confirm Deletion Sheet flow
+    await tester.tap(find.text('Delete 2 contacts'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Delete 2 contacts?'), findsOneWidget);
+    expect(find.text('THIS CANNOT BE UNDONE'), findsOneWidget);
+
+    // Tap Delete inside bottom sheet
+    await tester.tap(find.widgetWithText(PrimaryButton, 'Delete'));
+    await tester.pumpAndSettle();
+
+    expect(deletedContacts, isNotNull);
+    expect(deletedContacts!.length, 2);
   });
 
   testWidgets('Done Screen displays stats and Start over button',

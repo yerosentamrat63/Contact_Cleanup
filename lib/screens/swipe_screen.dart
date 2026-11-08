@@ -112,7 +112,8 @@ class _SwipeScreenState extends State<SwipeScreen>
       if (!mounted) return;
       final contact = widget.contacts[widget.currentIndex];
       HapticFeedback.lightImpact();
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         isDelete
             ? 'Marked ${contact.displayName} for deletion'
             : 'Kept ${contact.displayName}',
@@ -162,7 +163,11 @@ class _SwipeScreenState extends State<SwipeScreen>
   void _handleUndo() {
     if (widget.decisions.isNotEmpty && !_isAnimatingCommit) {
       HapticFeedback.mediumImpact();
-      SemanticsService.announce('Reverted last decision', TextDirection.ltr);
+      SemanticsService.sendAnnouncement(
+        View.of(context),
+        'Reverted last decision',
+        TextDirection.ltr,
+      );
       widget.onUndo();
     }
   }
@@ -403,7 +408,7 @@ class _SwipeScreenState extends State<SwipeScreen>
                             child: Text(
                               'or swipe',
                               style: AppTypography.smallLabel(
-                                color: AppColors.oliveDrab.withOpacity(0.7),
+                                color: AppColors.oliveDrab.withValues(alpha: 0.7),
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

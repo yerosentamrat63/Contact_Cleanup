@@ -56,23 +56,21 @@ class ContactService {
           },
         );
 
-        if (contacts.isNotEmpty) {
-          final items =
-              contacts.map((c) => ContactItem.fromFlutterContact(c)).toList();
+        final items =
+            contacts.map((c) => ContactItem.fromFlutterContact(c)).toList();
 
-          // Sort A to Z by display name
-          items.sort((a, b) => a.displayName
-              .toLowerCase()
-              .compareTo(b.displayName.toLowerCase()));
+        // Sort A to Z by display name
+        items.sort((a, b) => a.displayName
+            .toLowerCase()
+            .compareTo(b.displayName.toLowerCase()));
 
-          return items;
-        }
+        return items;
       }
     } catch (e) {
       debugPrint('Error loading device contacts: $e');
     }
 
-    // Fallback sample contacts if empty or running on desktop/web
+    // Fallback sample contacts only when running on desktop/web/simulated test environments
     final sample = ContactItem.getSampleContacts();
     sample.sort((a, b) =>
         a.displayName.toLowerCase().compareTo(b.displayName.toLowerCase()));
@@ -82,9 +80,10 @@ class ContactService {
   static Future<int> deleteContacts(List<ContactItem> contactsToDelete) async {
     int deleted = 0;
     for (final item in contactsToDelete) {
-      if (item.rawContact != null && item.rawContact!.id != null) {
+      final contactId = item.rawContact?.id ?? (item.id.startsWith('sample-') ? null : item.id);
+      if (contactId != null) {
         try {
-          await FlutterContacts.delete(item.rawContact!.id!);
+          await FlutterContacts.delete(contactId);
           deleted++;
         } catch (e) {
           debugPrint('Failed to delete contact ${item.displayName}: $e');

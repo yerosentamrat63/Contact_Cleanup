@@ -41,6 +41,9 @@ Contact Cleaner implements an earthy, tactile editorial design language:
 ## 🏗️ Architecture & Project Structure
 
 ```
+design/                        # Design handoff HTML & original master icon assets
+├── Contact Cleaner Screens.html
+└── app_icons/
 lib/
 ├── main.dart                  # App entry point & stage coordinator state machine
 ├── models/
